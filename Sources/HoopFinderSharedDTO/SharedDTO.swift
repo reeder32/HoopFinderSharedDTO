@@ -64,9 +64,11 @@ public struct LocationRequestDTO: Codable {
     public let isOutside: Bool?
     public let hasLights: Bool?
     public let needMembership: Bool?
+    public let users: [UUID]?
+  
 
     
-    public init(name: String, latitude: Double, longitude: Double, address: String, isOutside: Bool, hasLights: Bool, needMembership: Bool) {
+    public init(name: String, latitude: Double, longitude: Double, address: String, isOutside: Bool, hasLights: Bool, needMembership: Bool, users: [UUID]) {
         self.name = name
         self.latitude = latitude
         self.longitude = longitude
@@ -74,6 +76,7 @@ public struct LocationRequestDTO: Codable {
         self.isOutside = isOutside
         self.hasLights = hasLights
         self.needMembership = needMembership
+        self.users = users
     }
 }
 
