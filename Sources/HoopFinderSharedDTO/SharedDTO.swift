@@ -80,9 +80,10 @@ public struct UserProfileResponseDTO: Codable, Sendable {
     public let playFrequency: PlayFrequency?
     public let courtPreference: CourtPreference?
     public let overallRating: Int?
+    public let selfRating: Int?
     public let profileImagePath: String?
 
-    public init(id: UUID, username: String, name: String? = nil, email: String? = nil, height: Double? = nil, weight: Double? = nil, age: Int? = nil, experienceLevel: ExperienceLevel? = nil, yearsPlaying: Int? = nil, playFrequency: PlayFrequency? = nil, courtPreference: CourtPreference? = nil, overallRating: Int? = nil, profileImagePath: String? = nil) {
+    public init(id: UUID, username: String, name: String? = nil, email: String? = nil, height: Double? = nil, weight: Double? = nil, age: Int? = nil, experienceLevel: ExperienceLevel? = nil, yearsPlaying: Int? = nil, playFrequency: PlayFrequency? = nil, courtPreference: CourtPreference? = nil, overallRating: Int? = nil, selfRating: Int? = nil, profileImagePath: String? = nil) {
         self.id = id
         self.username = username
         self.name = name
@@ -95,6 +96,7 @@ public struct UserProfileResponseDTO: Codable, Sendable {
         self.playFrequency = playFrequency
         self.courtPreference = courtPreference
         self.overallRating = overallRating
+        self.selfRating = selfRating
         self.profileImagePath = profileImagePath
     }
 }
@@ -109,8 +111,9 @@ public struct UserProfileUpdateDTO: Codable, Sendable {
     public let yearsPlaying: Int?
     public let playFrequency: PlayFrequency?
     public let courtPreference: CourtPreference?
+    public let selfRating: Int?
 
-    public init(name: String? = nil, email: String? = nil, height: Double? = nil, weight: Double? = nil, age: Int? = nil, experienceLevel: ExperienceLevel? = nil, yearsPlaying: Int? = nil, playFrequency: PlayFrequency? = nil, courtPreference: CourtPreference? = nil) {
+    public init(name: String? = nil, email: String? = nil, height: Double? = nil, weight: Double? = nil, age: Int? = nil, experienceLevel: ExperienceLevel? = nil, yearsPlaying: Int? = nil, playFrequency: PlayFrequency? = nil, courtPreference: CourtPreference? = nil, selfRating: Int? = nil) {
         self.name = name
         self.email = email
         self.height = height
@@ -120,6 +123,7 @@ public struct UserProfileUpdateDTO: Codable, Sendable {
         self.yearsPlaying = yearsPlaying
         self.playFrequency = playFrequency
         self.courtPreference = courtPreference
+        self.selfRating = selfRating
     }
 }
 
