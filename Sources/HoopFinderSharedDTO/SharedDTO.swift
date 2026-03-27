@@ -163,8 +163,11 @@ public struct LocationResponseDTO: Codable {
     public let users: [UUID]?
     public let courtImagePaths: [String]?
     public let createdByUserId: UUID?
+    public let checkedInCount: Int?
+    public let checkedInUsers: [UserProfileResponseDTO]?
+    public let bestTimes: [BestTimeDTO]?
 
-    public init(id: UUID, name: String, latitude: Double, longitude: Double, address: String? = nil, isOutside: Bool? = nil, hasLights: Bool? = nil, needMembership: Bool? = nil, users: [UUID]? = nil, courtImagePaths: [String]? = nil, createdByUserId: UUID? = nil) {
+    public init(id: UUID, name: String, latitude: Double, longitude: Double, address: String? = nil, isOutside: Bool? = nil, hasLights: Bool? = nil, needMembership: Bool? = nil, users: [UUID]? = nil, courtImagePaths: [String]? = nil, createdByUserId: UUID? = nil, checkedInCount: Int? = nil, checkedInUsers: [UserProfileResponseDTO]? = nil, bestTimes: [BestTimeDTO]? = nil) {
         self.id = id
         self.name = name
         self.latitude = latitude
@@ -176,6 +179,98 @@ public struct LocationResponseDTO: Codable {
         self.users = users
         self.courtImagePaths = courtImagePaths
         self.createdByUserId = createdByUserId
+        self.checkedInCount = checkedInCount
+        self.checkedInUsers = checkedInUsers
+        self.bestTimes = bestTimes
+    }
+}
+
+// MARK: - Check-in DTOs
+
+public enum CheckinMode: String, Codable, CaseIterable, Sendable {
+    case manual
+    case geofence
+}
+
+public struct CheckinRequestDTO: Codable, Sendable {
+    public let mode: CheckinMode
+
+    public init(mode: CheckinMode) {
+        self.mode = mode
+    }
+}
+
+public struct CheckinResponseDTO: Codable, Sendable {
+    public let id: UUID
+    public let userId: UUID
+    public let locationId: UUID
+    public let checkedInAt: Date
+    public let expiresAt: Date
+
+    public init(id: UUID, userId: UUID, locationId: UUID, checkedInAt: Date, expiresAt: Date) {
+        self.id = id
+        self.userId = userId
+        self.locationId = locationId
+        self.checkedInAt = checkedInAt
+        self.expiresAt = expiresAt
+    }
+}
+
+// MARK: - Best Time DTOs
+
+public enum DayOfWeek: String, Codable, CaseIterable, Sendable {
+    case monday, tuesday, wednesday, thursday, friday, saturday, sunday
+    case weekday, weekend, everyday
+
+    public var displayName: String {
+        switch self {
+        case .monday: return "Mon"
+        case .tuesday: return "Tue"
+        case .wednesday: return "Wed"
+        case .thursday: return "Thu"
+        case .friday: return "Fri"
+        case .saturday: return "Sat"
+        case .sunday: return "Sun"
+        case .weekday: return "Weekdays"
+        case .weekend: return "Weekends"
+        case .everyday: return "Every Day"
+        }
+    }
+}
+
+public struct BestTimeDTO: Codable, Sendable {
+    public let id: UUID
+    public let locationId: UUID
+    public let addedByUserId: UUID
+    public let addedByUsername: String
+    public let days: [DayOfWeek]
+    public let startTime: String
+    public let endTime: String
+    public let note: String?
+
+    public init(id: UUID, locationId: UUID, addedByUserId: UUID, addedByUsername: String, days: [DayOfWeek], startTime: String, endTime: String, note: String? = nil) {
+        self.id = id
+        self.locationId = locationId
+        self.addedByUserId = addedByUserId
+        self.addedByUsername = addedByUsername
+        self.days = days
+        self.startTime = startTime
+        self.endTime = endTime
+        self.note = note
+    }
+}
+
+public struct BestTimeRequestDTO: Codable, Sendable {
+    public let days: [DayOfWeek]
+    public let startTime: String
+    public let endTime: String
+    public let note: String?
+
+    public init(days: [DayOfWeek], startTime: String, endTime: String, note: String? = nil) {
+        self.days = days
+        self.startTime = startTime
+        self.endTime = endTime
+        self.note = note
     }
 }
 
