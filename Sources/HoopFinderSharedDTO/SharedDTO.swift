@@ -315,3 +315,25 @@ public struct LocationRequestDTO: Codable {
     }
 }
 
+
+// MARK: - Presence Sync
+
+public struct UserLocationDTO: Codable, Sendable {
+    public let latitude: Double
+    public let longitude: Double
+
+    public init(latitude: Double, longitude: Double) {
+        self.latitude = latitude
+        self.longitude = longitude
+    }
+}
+
+public struct PresenceSyncResponseDTO: Codable, Sendable {
+    public let checkedOutFrom: [UUID]
+    public let checkedInTo: [UUID]
+
+    public init(checkedOutFrom: [UUID], checkedInTo: [UUID]) {
+        self.checkedOutFrom = checkedOutFrom
+        self.checkedInTo = checkedInTo
+    }
+}
