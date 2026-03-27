@@ -190,6 +190,7 @@ public struct LocationResponseDTO: Codable {
 public enum CheckinMode: String, Codable, CaseIterable, Sendable {
     case manual
     case geofence
+    case auto
 }
 
 public struct CheckinRequestDTO: Codable, Sendable {
@@ -206,13 +207,15 @@ public struct CheckinResponseDTO: Codable, Sendable {
     public let locationId: UUID
     public let checkedInAt: Date
     public let expiresAt: Date
+    public let mode: String
 
-    public init(id: UUID, userId: UUID, locationId: UUID, checkedInAt: Date, expiresAt: Date) {
+    public init(id: UUID, userId: UUID, locationId: UUID, checkedInAt: Date, expiresAt: Date, mode: String) {
         self.id = id
         self.userId = userId
         self.locationId = locationId
         self.checkedInAt = checkedInAt
         self.expiresAt = expiresAt
+        self.mode = mode
     }
 }
 
