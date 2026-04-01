@@ -390,14 +390,16 @@ public struct TeamMemberResponseDTO: Codable, Sendable {
     public let username: String
     public let role: String
     public let joinedAt: Date
+    public let checkedInLocationName: String?
 
-    public init(id: UUID, teamId: UUID, userId: UUID, username: String, role: String, joinedAt: Date) {
+    public init(id: UUID, teamId: UUID, userId: UUID, username: String, role: String, joinedAt: Date, checkedInLocationName: String? = nil) {
         self.id = id
         self.teamId = teamId
         self.userId = userId
         self.username = username
         self.role = role
         self.joinedAt = joinedAt
+        self.checkedInLocationName = checkedInLocationName
     }
 }
 
