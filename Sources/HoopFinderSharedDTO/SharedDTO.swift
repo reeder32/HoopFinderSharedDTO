@@ -160,6 +160,8 @@ public struct LocationResponseDTO: Codable {
     public let isOutside: Bool?
     public let hasLights: Bool?
     public let needMembership: Bool?
+    public let open24Hours: Bool?
+    public let operatingHours: String?
     public let users: [UUID]?
     public let courtImagePaths: [String]?
     public let createdByUserId: UUID?
@@ -167,7 +169,7 @@ public struct LocationResponseDTO: Codable {
     public let checkedInUsers: [UserProfileResponseDTO]?
     public let bestTimes: [BestTimeDTO]?
 
-    public init(id: UUID, name: String, latitude: Double, longitude: Double, address: String? = nil, isOutside: Bool? = nil, hasLights: Bool? = nil, needMembership: Bool? = nil, users: [UUID]? = nil, courtImagePaths: [String]? = nil, createdByUserId: UUID? = nil, checkedInCount: Int? = nil, checkedInUsers: [UserProfileResponseDTO]? = nil, bestTimes: [BestTimeDTO]? = nil) {
+    public init(id: UUID, name: String, latitude: Double, longitude: Double, address: String? = nil, isOutside: Bool? = nil, hasLights: Bool? = nil, needMembership: Bool? = nil, open24Hours: Bool? = nil, operatingHours: String? = nil, users: [UUID]? = nil, courtImagePaths: [String]? = nil, createdByUserId: UUID? = nil, checkedInCount: Int? = nil, checkedInUsers: [UserProfileResponseDTO]? = nil, bestTimes: [BestTimeDTO]? = nil) {
         self.id = id
         self.name = name
         self.latitude = latitude
@@ -176,6 +178,8 @@ public struct LocationResponseDTO: Codable {
         self.isOutside = isOutside
         self.hasLights = hasLights
         self.needMembership = needMembership
+        self.open24Hours = open24Hours
+        self.operatingHours = operatingHours
         self.users = users
         self.courtImagePaths = courtImagePaths
         self.createdByUserId = createdByUserId
@@ -283,18 +287,22 @@ public struct LocationUpdateDTO: Codable {
     public let isOutside: Bool?
     public let hasLights: Bool?
     public let needMembership: Bool?
+    public let open24Hours: Bool?
+    public let operatingHours: String?
 
-    public init(name: String? = nil, address: String? = nil, isOutside: Bool? = nil, hasLights: Bool? = nil, needMembership: Bool? = nil) {
+    public init(name: String? = nil, address: String? = nil, isOutside: Bool? = nil, hasLights: Bool? = nil, needMembership: Bool? = nil, open24Hours: Bool? = nil, operatingHours: String? = nil) {
         self.name = name
         self.address = address
         self.isOutside = isOutside
         self.hasLights = hasLights
         self.needMembership = needMembership
+        self.open24Hours = open24Hours
+        self.operatingHours = operatingHours
     }
 }
 
 public struct LocationRequestDTO: Codable {
-    
+
     public let name: String
     public let latitude: Double
     public let longitude: Double
@@ -302,11 +310,11 @@ public struct LocationRequestDTO: Codable {
     public let isOutside: Bool?
     public let hasLights: Bool?
     public let needMembership: Bool?
+    public let open24Hours: Bool?
+    public let operatingHours: String?
     public let users: [UUID]?
-  
 
-    
-    public init(name: String, latitude: Double, longitude: Double, address: String? = nil, isOutside: Bool? = nil, hasLights: Bool? = nil, needMembership: Bool? = nil, users: [UUID]? = nil) {
+    public init(name: String, latitude: Double, longitude: Double, address: String? = nil, isOutside: Bool? = nil, hasLights: Bool? = nil, needMembership: Bool? = nil, open24Hours: Bool? = nil, operatingHours: String? = nil, users: [UUID]? = nil) {
         self.name = name
         self.latitude = latitude
         self.longitude = longitude
@@ -314,6 +322,8 @@ public struct LocationRequestDTO: Codable {
         self.isOutside = isOutside
         self.hasLights = hasLights
         self.needMembership = needMembership
+        self.open24Hours = open24Hours
+        self.operatingHours = operatingHours
         self.users = users
     }
 }
