@@ -340,3 +340,71 @@ public struct PresenceSyncResponseDTO: Codable, Sendable {
         self.checkedInTo = checkedInTo
     }
 }
+
+// MARK: - Follow DTOs
+
+public struct FollowResponseDTO: Codable, Sendable {
+    public let id: UUID
+    public let followerId: UUID
+    public let followingId: UUID
+    public let createdAt: Date
+
+    public init(id: UUID, followerId: UUID, followingId: UUID, createdAt: Date) {
+        self.id = id
+        self.followerId = followerId
+        self.followingId = followingId
+        self.createdAt = createdAt
+    }
+}
+
+// MARK: - Team DTOs
+
+public struct TeamResponseDTO: Codable, Sendable {
+    public let id: UUID
+    public let name: String
+    public let creatorId: UUID
+    public let createdAt: Date
+    public let members: [TeamMemberResponseDTO]?
+
+    public init(id: UUID, name: String, creatorId: UUID, createdAt: Date, members: [TeamMemberResponseDTO]? = nil) {
+        self.id = id
+        self.name = name
+        self.creatorId = creatorId
+        self.createdAt = createdAt
+        self.members = members
+    }
+}
+
+public struct TeamRequestDTO: Codable, Sendable {
+    public let name: String
+
+    public init(name: String) {
+        self.name = name
+    }
+}
+
+public struct TeamMemberResponseDTO: Codable, Sendable {
+    public let id: UUID
+    public let teamId: UUID
+    public let userId: UUID
+    public let username: String
+    public let role: String
+    public let joinedAt: Date
+
+    public init(id: UUID, teamId: UUID, userId: UUID, username: String, role: String, joinedAt: Date) {
+        self.id = id
+        self.teamId = teamId
+        self.userId = userId
+        self.username = username
+        self.role = role
+        self.joinedAt = joinedAt
+    }
+}
+
+public struct AddTeamMemberRequestDTO: Codable, Sendable {
+    public let userId: UUID
+
+    public init(userId: UUID) {
+        self.userId = userId
+    }
+}
