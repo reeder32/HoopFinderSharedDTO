@@ -374,14 +374,24 @@ public struct TeamResponseDTO: Codable, Sendable {
     public let name: String
     public let creatorId: UUID
     public let createdAt: Date
+    public let teamIcon: String?
     public let members: [TeamMemberResponseDTO]?
 
-    public init(id: UUID, name: String, creatorId: UUID, createdAt: Date, members: [TeamMemberResponseDTO]? = nil) {
+    public init(id: UUID, name: String, creatorId: UUID, createdAt: Date, teamIcon: String? = nil, members: [TeamMemberResponseDTO]? = nil) {
         self.id = id
         self.name = name
         self.creatorId = creatorId
         self.createdAt = createdAt
+        self.teamIcon = teamIcon
         self.members = members
+    }
+}
+
+public struct TeamUpdateDTO: Codable, Sendable {
+    public let teamIcon: String?
+
+    public init(teamIcon: String? = nil) {
+        self.teamIcon = teamIcon
     }
 }
 
