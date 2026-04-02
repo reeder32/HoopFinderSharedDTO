@@ -420,3 +420,77 @@ public struct AddTeamMemberRequestDTO: Codable, Sendable {
         self.userId = userId
     }
 }
+
+// MARK: - Chat DTOs
+
+public struct ConversationResponseDTO: Codable, Sendable {
+    public let id: UUID
+    public let type: String
+    public let teamId: UUID?
+    public let teamName: String?
+    public let otherUser: UserProfileResponseDTO?
+    public let lastMessage: MessageResponseDTO?
+    public let updatedAt: Date
+
+    public init(id: UUID, type: String, teamId: UUID? = nil, teamName: String? = nil, otherUser: UserProfileResponseDTO? = nil, lastMessage: MessageResponseDTO? = nil, updatedAt: Date) {
+        self.id = id
+        self.type = type
+        self.teamId = teamId
+        self.teamName = teamName
+        self.otherUser = otherUser
+        self.lastMessage = lastMessage
+        self.updatedAt = updatedAt
+    }
+}
+
+public struct MessageResponseDTO: Codable, Sendable {
+    public let id: UUID
+    public let conversationId: UUID
+    public let senderId: UUID
+    public let senderUsername: String
+    public let body: String
+    public let createdAt: Date
+
+    public init(id: UUID, conversationId: UUID, senderId: UUID, senderUsername: String, body: String, createdAt: Date) {
+        self.id = id
+        self.conversationId = conversationId
+        self.senderId = senderId
+        self.senderUsername = senderUsername
+        self.body = body
+        self.createdAt = createdAt
+    }
+}
+
+public struct SendMessageRequestDTO: Codable, Sendable {
+    public let body: String
+
+    public init(body: String) {
+        self.body = body
+    }
+}
+
+public struct WSIncomingMessage: Codable, Sendable {
+    public let type: String
+    public let token: String?
+    public let conversationId: UUID?
+    public let body: String?
+
+    public init(type: String, token: String? = nil, conversationId: UUID? = nil, body: String? = nil) {
+        self.type = type
+        self.token = token
+        self.conversationId = conversationId
+        self.body = body
+    }
+}
+
+public struct WSOutgoingMessage: Codable, Sendable {
+    public let type: String
+    public let message: MessageResponseDTO?
+    public let error: String?
+
+    public init(type: String, message: MessageResponseDTO? = nil, error: String? = nil) {
+        self.type = type
+        self.message = message
+        self.error = error
+    }
+}
