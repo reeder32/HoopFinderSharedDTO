@@ -163,14 +163,17 @@ public struct LocationResponseDTO: Codable {
     public let open24Hours: Bool?
     public let operatingHours: String?
     public let notes: String?
+    public let isPrivate: Bool?
+    public let allowedTeamIds: [UUID]?
     public let users: [UUID]?
     public let courtImagePaths: [String]?
+    public let courtVideoPaths: [String]?
     public let createdByUserId: UUID?
     public let checkedInCount: Int?
     public let checkedInUsers: [UserProfileResponseDTO]?
     public let bestTimes: [BestTimeDTO]?
 
-    public init(id: UUID, name: String, latitude: Double, longitude: Double, address: String? = nil, isOutside: Bool? = nil, hasLights: Bool? = nil, needMembership: Bool? = nil, open24Hours: Bool? = nil, operatingHours: String? = nil, notes: String? = nil, users: [UUID]? = nil, courtImagePaths: [String]? = nil, createdByUserId: UUID? = nil, checkedInCount: Int? = nil, checkedInUsers: [UserProfileResponseDTO]? = nil, bestTimes: [BestTimeDTO]? = nil) {
+    public init(id: UUID, name: String, latitude: Double, longitude: Double, address: String? = nil, isOutside: Bool? = nil, hasLights: Bool? = nil, needMembership: Bool? = nil, open24Hours: Bool? = nil, operatingHours: String? = nil, notes: String? = nil, isPrivate: Bool? = nil, allowedTeamIds: [UUID]? = nil, users: [UUID]? = nil, courtImagePaths: [String]? = nil, courtVideoPaths: [String]? = nil, createdByUserId: UUID? = nil, checkedInCount: Int? = nil, checkedInUsers: [UserProfileResponseDTO]? = nil, bestTimes: [BestTimeDTO]? = nil) {
         self.id = id
         self.name = name
         self.latitude = latitude
@@ -182,8 +185,11 @@ public struct LocationResponseDTO: Codable {
         self.open24Hours = open24Hours
         self.operatingHours = operatingHours
         self.notes = notes
+        self.isPrivate = isPrivate
+        self.allowedTeamIds = allowedTeamIds
         self.users = users
         self.courtImagePaths = courtImagePaths
+        self.courtVideoPaths = courtVideoPaths
         self.createdByUserId = createdByUserId
         self.checkedInCount = checkedInCount
         self.checkedInUsers = checkedInUsers
@@ -317,9 +323,11 @@ public struct LocationRequestDTO: Codable {
     public let open24Hours: Bool?
     public let operatingHours: String?
     public let notes: String?
+    public let isPrivate: Bool?
+    public let allowedTeamIds: [UUID]?
     public let users: [UUID]?
 
-    public init(name: String, latitude: Double, longitude: Double, address: String? = nil, isOutside: Bool? = nil, hasLights: Bool? = nil, needMembership: Bool? = nil, open24Hours: Bool? = nil, operatingHours: String? = nil, notes: String? = nil, users: [UUID]? = nil) {
+    public init(name: String, latitude: Double, longitude: Double, address: String? = nil, isOutside: Bool? = nil, hasLights: Bool? = nil, needMembership: Bool? = nil, open24Hours: Bool? = nil, operatingHours: String? = nil, notes: String? = nil, isPrivate: Bool? = nil, allowedTeamIds: [UUID]? = nil, users: [UUID]? = nil) {
         self.name = name
         self.latitude = latitude
         self.longitude = longitude
@@ -330,6 +338,8 @@ public struct LocationRequestDTO: Codable {
         self.open24Hours = open24Hours
         self.operatingHours = operatingHours
         self.notes = notes
+        self.isPrivate = isPrivate
+        self.allowedTeamIds = allowedTeamIds
         self.users = users
     }
 }
@@ -508,5 +518,17 @@ public struct WSOutgoingMessage: Codable, Sendable {
         self.type = type
         self.message = message
         self.error = error
+    }
+}
+
+// MARK: - Location Privacy
+
+public struct LocationPrivacyUpdateDTO: Codable, Sendable {
+    public let isPrivate: Bool
+    public let teamIds: [UUID]
+
+    public init(isPrivate: Bool, teamIds: [UUID]) {
+        self.isPrivate = isPrivate
+        self.teamIds = teamIds
     }
 }
