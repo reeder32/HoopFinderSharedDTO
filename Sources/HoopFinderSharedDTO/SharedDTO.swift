@@ -131,13 +131,25 @@ public struct LoginResponseDTO: Codable {
     public let error: Bool
     public var reason: String? = nil
     public var token: String? = nil
+    public var refreshToken: String? = nil
     public var userId: UUID? = nil
-    
-    public init(error: Bool, reason: String? = nil, token: String? = nil, userId: UUID? = nil) {
+    public var expiresIn: Int? = nil
+
+    public init(error: Bool, reason: String? = nil, token: String? = nil, refreshToken: String? = nil, userId: UUID? = nil, expiresIn: Int? = nil) {
         self.error = error
         self.reason = reason
         self.token = token
+        self.refreshToken = refreshToken
         self.userId = userId
+        self.expiresIn = expiresIn
+    }
+}
+
+public struct RefreshRequestDTO: Codable, Sendable {
+    public let refreshToken: String
+
+    public init(refreshToken: String) {
+        self.refreshToken = refreshToken
     }
 }
 
